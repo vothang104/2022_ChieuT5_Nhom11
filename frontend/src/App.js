@@ -1,11 +1,18 @@
 import React from "react";
-import HomePage from "./pages";
+import { Routes, Route } from 'react-router-dom'
+import { publicRoutes } from "./routes";
 
 function App() {
   return (
-    <div className="App">
-      <HomePage />
-    </div>
+    <>
+      <Routes>
+        {
+          publicRoutes.map(route => (
+            <Route key={route.id} path={route.path} element={route.page} />
+          ))
+        }
+      </Routes>
+    </>
   );
 }
 
