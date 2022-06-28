@@ -1,9 +1,11 @@
-import { Box, Button, Container, Stack, Typography } from '@mui/material'
 import React from 'react'
+import './Header.scss'
+import { Box, Container, Stack, Typography } from '@mui/material'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../images/logo.png'
 import User from './User';
+import { NavLink, Link } from 'react-router-dom'
 
 function Header() {
     const navigate = useNavigate();
@@ -22,49 +24,54 @@ function Header() {
         >
             <Container sx={{ height: '100%' }} maxWidth='lg'>
                 <Stack height={'100%'} direction='row' justifyContent='space-between' alignItems='center'>
-                    <Box sx={{ display: 'flex', alignItems: 'flex-end', gap: '10px', color: 'myColor.white' }}>
-                        <img
-                            onClick={() => navigate('/')}
-                            style={{
-                                width: 40,
-                                height: 40,
-                                borderRadius: '50%',
-                                objectFit: 'cover',
-                                cursor: 'pointer'
-                            }}
-                            src={logo} alt="logo"
-                        />
-                        <Typography variant='h5'>Thư viện</Typography>
+                    <Box sx={{ height: '100%', display: 'flex', alignItems: 'center', gap: '40px', color: 'myColor.white' }}>
+                        <Box
+                            sx={{ display: 'flex', alignItems: 'flex-end', gap: '10px', color: 'myColor.white' }}
+                        >
+                            <img
+                                onClick={() => navigate('/')}
+                                style={{
+                                    width: 40,
+                                    height: 40,
+                                    borderRadius: '50%',
+                                    objectFit: 'cover',
+                                    cursor: 'pointer'
+                                }}
+                                src={logo} alt="logo"
+                            />
+                            <Typography variant='h5'>Thư viện</Typography>
+                        </Box>
+                        <Stack height='100%' direction='row' spacing={3}>
+                            <NavLink className='navigation-link' to='/'>Trang chủ</NavLink>
+                            <NavLink onClick={(e) => e.preventDefault()} className='navigation-link' to='/category'>Thể loại</NavLink>
+                            <NavLink onClick={(e) => e.preventDefault()} className='navigation-link' to='/category'>Tin tức</NavLink>
+                            <NavLink onClick={(e) => e.preventDefault()} className='navigation-link' to='/category'>Liên hệ</NavLink>
+                        </Stack>
+                    </Box>
+                    <Box>
+                        <div className="wrapper-search">
+                            <input className='search' type="text" placeholder='Bạn muốn tìm gì?' />
+                            <span className='search-icon'>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </span>
+                        </div>
                     </Box>
                     {
-                        Object.entries(currentUser).length > 0 ?
+                        currentUser &&
+                            Object.entries(currentUser).length > 0 ?
                             <User currentUser={currentUser} /> :
-                            <Stack direction='row' spacing={2}>
-                                <Button
-                                    onClick={() => navigate('/login')}
-                                    sx={{
-                                        backgroundColor: 'myColor.white',
-                                        '&:hover': {
-                                            backgroundColor: 'myColor.white',
-                                            transition: 'all linear 0.1s',
-                                            transform: 'translate(0px, -1px)',
-                                        }
+                            <Stack direction='row' spacing={1} alignItems='center'>
+                                <Link className='action-link' to='/login'>Đăng nhập</Link>
+                                <span
+                                    style={{
+                                        textDecoration: 'none',
+                                        color: 'white',
+                                        fontWeight: 200
                                     }}
-                                    variant='outlined'
-                                >Đăng nhập</Button>
-                                <Button
-                                    onClick={() => navigate('/register')}
-                                    sx={{
-                                        display: { xs: 'none', sm: 'block' },
-                                        backgroundColor: 'myColor.white',
-                                        '&:hover': {
-                                            backgroundColor: 'myColor.white',
-                                            transition: 'all linear 0.1s',
-                                            transform: 'translate(0px, -1px)',
-                                        }
-                                    }}
-                                    variant='outlined'
-                                >Đăng ký</Button>
+                                >|</span>
+                                <Link className='action-link' to='/register'>Đăng ký</Link>
                             </Stack>
                     }
                 </Stack>
