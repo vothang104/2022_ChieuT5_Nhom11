@@ -9,6 +9,7 @@ import './index.scss';
 import { Provider } from 'react-redux'
 import { store, persistor } from './redux/store'
 import { PersistGate } from 'redux-persist/integration/react';
+import { BorrowedBookProvider } from './contexts/borrowedBookContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,9 +17,11 @@ root.render(
     <ThemeProvider theme={myTheme}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <Router>
-            <App />
-          </Router>
+          <BorrowedBookProvider>
+            <Router>
+              <App />
+            </Router>
+          </BorrowedBookProvider>
         </PersistGate>
       </Provider>
     </ThemeProvider>

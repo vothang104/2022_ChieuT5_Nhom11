@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Header.scss'
 import { Box, Container, Stack, Typography } from '@mui/material'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../images/logo.png'
 import User from './User';
 import { NavLink, Link } from 'react-router-dom'
+import { getAllCategory } from '../../redux/apiRequest';
 
 function Header() {
     const navigate = useNavigate();
     const { currentUser } = useSelector(state => state.auth.login);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        getAllCategory(dispatch);
+    }, [])
     return (
         <Box
             sx={{
