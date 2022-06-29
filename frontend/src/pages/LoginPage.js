@@ -28,6 +28,7 @@ export default function RegisterPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { success } = useSelector(state => state.auth.register);
+    const { error } = useSelector(state => state.auth.login);
     const [viewPassword, setViewPassword] = useState(false);
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
         defaultValues: {
@@ -88,6 +89,13 @@ export default function RegisterPage() {
                         <Alert sx={{ width: '100%' }} severity="success">
                             <AlertTitle>Đăng ký thành công</AlertTitle>
                             Vui lòng kiểm tra email để lấy <strong>Mã số thẻ</strong>
+                        </Alert>
+                    }
+                    {
+                        error &&
+                        <Alert sx={{ width: '100%', mt: 1 }} severity="error">
+                            <AlertTitle>Đăng nhập không thành công</AlertTitle>
+                            Kiểm tra <strong>mã số thẻ</strong> hoặc <strong>mật khẩu</strong>
                         </Alert>
                     }
                     <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 3 }}>

@@ -13,10 +13,11 @@ import NewspaperIcon from '@mui/icons-material/Newspaper';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import CircleIcon from '@mui/icons-material/Circle';
 import { Box } from '@mui/system';
+import { useSelector } from 'react-redux';
 
 function SideBar() {
-    const [open, setOpen] = React.useState(true);
-
+    const { list: categories } = useSelector(state => state.category.listCategory);
+    const [open, setOpen] = React.useState(false);
     const handleClick = () => {
         setOpen(!open);
     };
@@ -54,12 +55,17 @@ function SideBar() {
                 </ListItemButton>
                 <Collapse in={open} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                        <ListItemButton sx={{ pl: 4 }}>
-                            <ListItemIcon>
-                                <CircleIcon sx={{ fontSize: '12px' }} color='primary' />
-                            </ListItemIcon>
-                            <ListItemText primary="Starred" />
-                        </ListItemButton>
+                        {
+                            categories &&
+                            categories.map(cate => (
+                                <ListItemButton key={cate.id} sx={{ pl: 4 }}>
+                                    <ListItemIcon>
+                                        <CircleIcon sx={{ fontSize: '12px' }} color='primary' />
+                                    </ListItemIcon>
+                                    <ListItemText primary={cate.name} />
+                                </ListItemButton>
+                            ))
+                        }
                     </List>
                 </Collapse>
 

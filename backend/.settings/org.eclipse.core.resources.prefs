@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//src/main/java/thuvien/controller/BorrowBookController.java=UTF-8
+encoding//src/main/java/thuvien/controller/LoginController.java=UTF-8
+encoding//src/main/java/thuvien/controller/LogoutController.java=UTF-8
+encoding//src/main/java/thuvien/controller/RegisterController.java=UTF-8
+encoding//src/main/java/thuvien/mail/SendMailText.java=UTF-8
+encoding//src/main/java/thuvien/service/impl/UserService.java=UTF-8
+encoding//src/main/java/thuvien/util/GenerateUniqueCardNumber.java=UTF-8
+encoding//src/main/java/thuvien/util/JWTUtil.java=UTF-8

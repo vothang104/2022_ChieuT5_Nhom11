@@ -7,6 +7,12 @@
 html {
   font-family: "Poppins", sans-serif;
 }
+// global class
+.no-scroll {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 .have-y-scroll {
   &::-webkit-scrollbar {
     width: 10px;
@@ -17,7 +23,6 @@ html {
     border-radius: 20px;
   }
 }
-// global class
 .four-lines {
   display: -webkit-box;
   -webkit-box-orient: vertical;

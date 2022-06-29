@@ -5,34 +5,36 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { useNavigate } from 'react-router-dom';
 
-export default function Book({ description }) {
+export default function Book({ book }) {
+    const navigate = useNavigate();
+
     return (
         <Card style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-            <CardActionArea>
+            <CardActionArea onClick={() => navigate(`/detail/${book.id}`)}>
                 <CardMedia
                     sx={{
                         height: '250px'
                     }}
                     component="img"
                     height="140"
-                    image="https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Ym9va3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+                    image={book?.thumbnail}
                     alt="green iguana"
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Tên sách
-                    </Typography>
+                    <Typography gutterBottom variant="h5" component="div">{book?.title}</Typography>
                     <Typography sx={{
                         flexGrow: '1',
                         flexShrink: '0'
                     }} className='four-lines' variant="body2" color="text.secondary">
-                        {description}
+                        {book?.description}
                     </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions sx={{ marginTop: 'auto' }}>
                 <Button
+                    onClick={() => navigate(`/detail/${book.id}`)}
                     sx={{
 
                     }}
