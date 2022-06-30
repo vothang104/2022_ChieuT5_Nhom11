@@ -109,8 +109,8 @@ export default function RegisterPage() {
                                     autoFocus
                                 />
                                 {
-                                    errors?.email &&
-                                    <FormHelperText sx={{ marginTop: '5px', fontStyle: 'italic', color: 'myColor.error' }} component='p'>{errors.email.message}</FormHelperText>
+                                    errors?.cardCode &&
+                                    <FormHelperText sx={{ marginTop: '5px', fontStyle: 'italic', color: 'myColor.error' }} component='p'>{errors.cardCode.message}</FormHelperText>
                                 }
                             </Grid>
                             <Grid item xs={12}>
