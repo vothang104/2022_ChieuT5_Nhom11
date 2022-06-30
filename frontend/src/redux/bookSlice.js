@@ -7,6 +7,9 @@ const bookSlice = createSlice({
             list: null,
             isFetching: false,
             error: false
+        },
+        filter: {
+            name: ''
         }
     },
     reducers: {
@@ -15,12 +18,15 @@ const bookSlice = createSlice({
         },
         getBookSuccess(state, action) {
             state.listBook.isFetching = false;
-            state.listBook.list = action.payload;
+            state.listBook.list = action.payload.filter(item => item.title.toLowerCase().includes(state.filter.name.toLowerCase()));
             state.listBook.error = false;
         },
         getBookFail(state) {
             state.listBook.isFetching = false;
             state.listBook.error = true;
+        },
+        changeFilterName(state, action) {
+            state.filter.name = action.payload;
         }
     }
 })
@@ -29,5 +35,6 @@ export default bookSlice.reducer;
 export const {
     getBookStart,
     getBookFail,
-    getBookSuccess
+    getBookSuccess,
+    changeFilterName
 } = bookSlice.actions

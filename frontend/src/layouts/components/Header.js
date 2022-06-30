@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Header.scss'
 import { Box, Container, Stack, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,15 +6,27 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../../images/logo.png'
 import User from './User';
 import { NavLink, Link } from 'react-router-dom'
-import { getAllCategory } from '../../redux/apiRequest';
+import { getAllBook, getAllCategory } from '../../redux/apiRequest';
+import { changeFilterName } from '../../redux/bookSlice';
 
 function Header() {
     const navigate = useNavigate();
     const { currentUser } = useSelector(state => state.auth.login);
     const dispatch = useDispatch();
+    const [search, setSearch] = useState('');
+
+    useEffect(() => {
+        const searchBook = async () => {
+            await dispatch(changeFilterName(search));
+            getAllBook(dispatch);
+        }
+        searchBook();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [search])
 
     useEffect(() => {
         getAllCategory(dispatch);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
         <Box
@@ -56,7 +68,7 @@ function Header() {
                     </Box>
                     <Box>
                         <div className="wrapper-search">
-                            <input className='search' type="text" placeholder='Bạn muốn tìm gì?' />
+                            <input value={search} onChange={(e) => setSearch(e.target.value)} className='search' type="text" placeholder='Bạn muốn tìm gì?' />
                             <span className='search-icon'>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
